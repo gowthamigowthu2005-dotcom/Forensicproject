@@ -16,7 +16,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const backendDir = path.resolve(__dirname, "..");
 const projectDir = path.resolve(backendDir, "..");
-const pythonPath = process.env.PYTHON_PATH || path.join(projectDir, ".venv", "Scripts", "python.exe");
+const defaultPython = existsSync(path.join(projectDir, ".venv", "Scripts", "python.exe"))
+  ? path.join(projectDir, ".venv", "Scripts", "python.exe")
+  : "python";
+const pythonPath = process.env.PYTHON_PATH || defaultPython;
 
 const styleganScript = path.join(backendDir, "inference", "stylegan_generate.py");
 const irisRecolorScript = path.join(backendDir, "inference", "recolor_iris.py");
@@ -35,7 +38,7 @@ function getKaggleGalleryDir() {
     return path.resolve(process.env.KAGGLE_FACE_GALLERY_DIR);
   }
   const indianDir = path.join(backendDir, "generated_faces", "indian_frontal");
-  if (existsSync(indianDir)) {
+  if (existsSync(indianDir) && loadFaceGallery(indianDir).length > 0) {
     return indianDir;
   }
   return path.join(backendDir, "generated_faces", "kaggle");

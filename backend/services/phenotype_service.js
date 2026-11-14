@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { spawn } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -6,7 +7,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const backendDir = path.resolve(__dirname, "..");
 const projectDir = path.resolve(backendDir, "..");
-const pythonPath = process.env.PYTHON_PATH || path.join(projectDir, ".venv", "Scripts", "python.exe");
+const defaultPython = existsSync(path.join(projectDir, ".venv", "Scripts", "python.exe"))
+  ? path.join(projectDir, ".venv", "Scripts", "python.exe")
+  : "python";
+const pythonPath = process.env.PYTHON_PATH || defaultPython;
 const predictScript = path.join(backendDir, "inference", "predict_traits.py");
 
 export function predictPhenotypeFromSnp(profile = {}, signal) {
