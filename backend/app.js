@@ -19,13 +19,33 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
+// Serve the built frontend from backend/dist (populated at deploy time)
+const frontendDist = path.join(__dirname, "dist");
+app.use(express.static(frontendDist));
+
 app.use("/api/auth", authRouter);
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api", generationRouter);
 app.use("/api/labeler", labelerRouter);
 
 app.get("/", (req, res) => {
-  res.json({ message: "Forensic Face Generation API is running." });
+  // If frontend is built, serve index.html; otherwise show API status
+  const indexPath = path.join(__dirname, "dist", "index.html");
+  if (require("fs").existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.json({ message: "Forensic Face Generation API is running." });
+  }
+});
+
+// SPA fallback: any non-API route serves the frontend
+app.get(/^\/(?!api).*/, (req, res) => {
+  const indexPath = path.join(__dirname, "dist", "index.html");
+  if (require("fs").existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).json({ error: "Frontend not built" });
+  }
 });
 
 // ── MongoDB: connect with a short timeout so the server starts fast ───────────
