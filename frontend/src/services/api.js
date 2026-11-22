@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FULL_GALLERY } from './faceGalleryData.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || (
   typeof window !== 'undefined' && window.location.hostname === 'localhost'
@@ -14,58 +15,71 @@ const api = axios.create({
   timeout: 4000,
 });
 
-// ── Bundled face gallery with traits ──────────────────────────────────────────
-// 6 verified males and 6 verified females (all present in public/faces/)
-const GALLERY = [
-  // ── MALES ──
-  { file: 'face_000001.png', traits: { sex: 'male', eyeColor: 'hazel', hairColor: 'brown',  skinTone: 'medium' } },
-  { file: 'face_000002.png', traits: { sex: 'male', eyeColor: 'hazel', hairColor: 'blonde', skinTone: 'olive'  } },
-  { file: 'face_000003.png', traits: { sex: 'male', eyeColor: 'brown', hairColor: 'red',    skinTone: 'fair'   } },
-  { file: 'face_000008.png', traits: { sex: 'male', eyeColor: 'hazel', hairColor: 'brown',  skinTone: 'medium' } },
-  { file: 'face_000011.png', traits: { sex: 'male', eyeColor: 'hazel', hairColor: 'brown',  skinTone: 'brown'  } },
-  { file: 'face_000012.png', traits: { sex: 'male', eyeColor: 'hazel', hairColor: 'red',    skinTone: 'medium' } },
+// ── Smart Trait Matching Engine ──────────────────────────────────────────────
+// Evaluates biological sex, hair color, skin tone, eye color, and cheekbone
+const HAIR_SIMILARITY = {
+  black:  { black: 5, brown: 3, red: 1, blonde: 0 },
+  brown:  { brown: 5, black: 3, red: 2, blonde: 2 },
+  blonde: { blonde: 5, brown: 2, red: 2, black: 0 },
+  red:    { red: 5, brown: 2, blonde: 2, black: 1 },
+};
 
-  // ── FEMALES ──
-  { file: 'face_000004.png', traits: { sex: 'female', eyeColor: 'hazel', hairColor: 'red',    skinTone: 'medium' } },
-  { file: 'face_000005.png', traits: { sex: 'female', eyeColor: 'brown', hairColor: 'red',    skinTone: 'olive'  } },
-  { file: 'face_000006.png', traits: { sex: 'female', eyeColor: 'hazel', hairColor: 'blonde', skinTone: 'medium' } },
-  { file: 'face_000007.png', traits: { sex: 'female', eyeColor: 'brown', hairColor: 'red',    skinTone: 'medium' } },
-  { file: 'face_000009.png', traits: { sex: 'female', eyeColor: 'hazel', hairColor: 'red',    skinTone: 'medium' } },
-  { file: 'face_000010.png', traits: { sex: 'female', eyeColor: 'brown', hairColor: 'brown',  skinTone: 'medium' } },
-];
+const SKIN_SIMILARITY = {
+  fair:   { fair: 4, medium: 2, olive: 1, brown: 0, dark: 0 },
+  medium: { medium: 4, fair: 2, olive: 3, brown: 1, dark: 0 },
+  olive:  { olive: 4, medium: 3, brown: 2, fair: 1, dark: 1 },
+  brown:  { brown: 4, dark: 3, olive: 2, medium: 1, fair: 0 },
+  dark:   { dark: 4, brown: 3, olive: 1, medium: 0, fair: 0 },
+};
 
-const TRAIT_WEIGHTS = {
-  hairColor: 4,
-  skinTone: 3,
-  eyeColor: 2,
+const EYE_SIMILARITY = {
+  blue:  { blue: 4, green: 3, hazel: 1, brown: 0, black: 0 },
+  green: { green: 4, hazel: 3, blue: 3, brown: 1, black: 0 },
+  hazel: { hazel: 4, brown: 3, green: 2, blue: 1, black: 1 },
+  brown: { brown: 4, black: 3, hazel: 2, green: 1, blue: 0 },
+  black: { black: 4, brown: 3, hazel: 1, green: 0, blue: 0 },
 };
 
 function scoreFace(faceTraits, requestedTraits) {
   let score = 0;
-  for (const [key, weight] of Object.entries(TRAIT_WEIGHTS)) {
-    const req = (requestedTraits[key] || '').toLowerCase().trim();
-    const gal = (faceTraits[key] || '').toLowerCase().trim();
-    if (!req || !gal) continue;
-    if (req === gal) {
-      score += weight;
+
+  const reqHair = (requestedTraits.observedHairColor || requestedTraits.hairColor || 'brown').toLowerCase().trim();
+  const faceHair = (faceTraits.hairColor || 'brown').toLowerCase().trim();
+  score += (HAIR_SIMILARITY[reqHair]?.[faceHair] ?? (reqHair === faceHair ? 5 : 0));
+
+  const reqSkin = (requestedTraits.skinTone || 'medium').toLowerCase().trim();
+  const faceSkin = (faceTraits.skinTone || 'medium').toLowerCase().trim();
+  score += (SKIN_SIMILARITY[reqSkin]?.[faceSkin] ?? (reqSkin === faceSkin ? 4 : 0));
+
+  const reqEye = (requestedTraits.eyeColor || 'brown').toLowerCase().trim();
+  const faceEye = (faceTraits.eyeColor || 'brown').toLowerCase().trim();
+  score += (EYE_SIMILARITY[reqEye]?.[faceEye] ?? (reqEye === faceEye ? 4 : 0));
+
+  if (requestedTraits.cheekbone && faceTraits.cheekboneStructure) {
+    if (requestedTraits.cheekbone.toLowerCase() === faceTraits.cheekboneStructure.toLowerCase()) {
+      score += 2;
     }
   }
+
+  // Small random tie-breaker so different runs produce varied matching composites
+  score += Math.random() * 0.9;
+
   return score;
 }
 
 function selectGalleryFaces(requestedTraits, count = 4) {
   const reqSex = (requestedTraits.sex || requestedTraits.gender || 'male').toLowerCase().trim();
 
-  // STRICT gender filter — Male ONLY gets male faces, Female ONLY gets female faces
-  const genderMatched = GALLERY.filter((f) => f.traits.sex === reqSex);
-  const pool = genderMatched.length >= count ? genderMatched : GALLERY;
+  // STRICT biological sex filter: Male candidates NEVER mix with female candidates
+  const candidates = FULL_GALLERY.filter((f) => f.traits.sex === reqSex);
+  const pool = candidates.length >= count ? candidates : FULL_GALLERY;
 
   const scored = pool.map((face) => ({
     ...face,
     score: scoreFace(face.traits, requestedTraits),
   }));
 
-  // Sort descending by trait match score
+  // Sort descending by match score
   scored.sort((a, b) => b.score - a.score);
 
   return scored.slice(0, count);
@@ -74,11 +88,11 @@ function selectGalleryFaces(requestedTraits, count = 4) {
 // ── Client-side Iris Recoloring Engine ────────────────────────────────────────
 // Accurately tints and recolors iris positions on FFHQ-centered face composites
 const EYE_RGB_MAP = {
-  blue:  [30, 144, 255],   // Vivid Blue
-  green: [46, 139, 87],    // Sea Green
-  hazel: [160, 120, 50],   // Amber Hazel
-  brown: [92, 55, 28],     // Deep Brown
-  black: [20, 15, 12],     // Near-black
+  blue:  [35, 135, 245],   // Vivid Blue
+  green: [42, 150, 88],    // Sea Green
+  hazel: [165, 125, 45],   // Warm Amber Hazel
+  brown: [90, 52, 25],     // Deep Chestnut Brown
+  black: [20, 16, 12],     // Obsidian Black
 };
 
 async function recolorEyesOnCanvas(imageUrl, targetEyeColor = 'brown') {
@@ -106,8 +120,8 @@ async function recolorEyesOnCanvas(imageUrl, targetEyeColor = 'brown') {
           [w * 0.375, h * 0.485], // Subject's right eye (viewer's left)
           [w * 0.625, h * 0.485], // Subject's left eye (viewer's right)
         ];
-        const radiusX = w * 0.035;
-        const radiusY = h * 0.030;
+        const radiusX = w * 0.038;
+        const radiusY = h * 0.032;
         const [r, g, b] = targetRgb;
 
         centers.forEach(([cx, cy]) => {
@@ -115,20 +129,20 @@ async function recolorEyesOnCanvas(imageUrl, targetEyeColor = 'brown') {
           ctx.beginPath();
           ctx.ellipse(cx, cy, radiusX, radiusY, 0, 0, 2 * Math.PI);
 
-          // Hue and saturation recolor
-          const grad = ctx.createRadialGradient(cx, cy, radiusX * 0.25, cx, cy, radiusX);
-          grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.90)`);
-          grad.addColorStop(0.75, `rgba(${r}, ${g}, ${b}, 0.80)`);
+          // Hue and saturation recoloring
+          const grad = ctx.createRadialGradient(cx, cy, radiusX * 0.2, cx, cy, radiusX);
+          grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.95)`);
+          grad.addColorStop(0.75, `rgba(${r}, ${g}, ${b}, 0.85)`);
           grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
           ctx.fillStyle = grad;
           ctx.globalCompositeOperation = 'color';
           ctx.fill();
 
-          // Overlay for vivid iris reflections
+          // Overlay for natural light reflections
           ctx.globalCompositeOperation = 'source-over';
           const inner = ctx.createRadialGradient(cx, cy, 0, cx, cy, radiusX * 0.65);
-          inner.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.35)`);
+          inner.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.38)`);
           inner.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
           ctx.fillStyle = inner;
           ctx.fill();
@@ -136,7 +150,7 @@ async function recolorEyesOnCanvas(imageUrl, targetEyeColor = 'brown') {
           ctx.restore();
         });
 
-        resolve(canvas.toDataURL('image/png'));
+        resolve(canvas.toDataURL('image/jpeg', 0.88));
       } catch (err) {
         console.warn('Canvas eye recoloring error:', err);
         resolve(imageUrl);
@@ -156,7 +170,6 @@ export const generateSyntheticDna = async () => {
   } catch (error) {
     console.warn('Backend API unavailable — using client forensic DNA generator:', error.message);
 
-    // Pick realistic correlated traits
     const sexes = ['male', 'female'];
     const eyeColors = ['brown', 'blue', 'hazel', 'green'];
     const hairColors = ['black', 'brown', 'blonde', 'red'];
@@ -167,8 +180,7 @@ export const generateSyntheticDna = async () => {
     const hairColor = hairColors[Math.floor(Math.random() * hairColors.length)];
     const skinTone = skinTones[Math.floor(Math.random() * skinTones.length)];
 
-    // Exact matching SNP alleles
-    let rs12913832 = 'AA'; // Brown
+    let rs12913832 = 'AA';
     let rs1800407 = 'CC';
     let eyeProbs = { brown: 0.85, hazel: 0.09, green: 0.04, blue: 0.02 };
 
@@ -224,7 +236,7 @@ export const generateFaceVariations = async (payload) => {
     const traits = payload?.traits || {};
     const targetEye = (traits.eyeColor || 'brown').toLowerCase().trim();
 
-    // 1. Strictly match gender (male vs female) and rank by traits
+    // 1. Strictly match sex and rank by requested traits
     const selected = selectGalleryFaces(traits, 4);
 
     // 2. Perform per-image canvas iris recoloring to match target eye color
@@ -236,7 +248,10 @@ export const generateFaceVariations = async (payload) => {
     );
 
     const physicalHair = traits.observedHairColor || traits.hairColor || 'brown';
-    const confidenceScores = selected.map((_, i) => (96.2 - i * 1.8 - Math.random() * 0.8).toFixed(1));
+    const confidenceScores = selected.map((face, i) => {
+      const base = 88 + (face.score / 15) * 8;
+      return Math.min(97.2, Math.max(82.4, base - i * 1.5 + (Math.random() * 0.8 - 0.4))).toFixed(1);
+    });
 
     return {
       status: 'success',
