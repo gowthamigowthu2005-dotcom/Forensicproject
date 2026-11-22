@@ -7,7 +7,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000002.jpg",
@@ -17,7 +18,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000003.jpg",
@@ -27,7 +29,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "fair",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000004.jpg",
@@ -37,7 +40,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000005.jpg",
@@ -47,7 +51,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000006.jpg",
@@ -57,7 +62,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000007.jpg",
@@ -67,7 +73,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000008.jpg",
@@ -77,7 +84,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000009.jpg",
@@ -87,7 +95,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000010.jpg",
@@ -97,7 +106,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000011.jpg",
@@ -107,7 +117,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "brown",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000012.jpg",
@@ -117,7 +128,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000013.jpg",
@@ -127,7 +139,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000014.jpg",
@@ -137,7 +150,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000015.jpg",
@@ -147,7 +161,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000016.jpg",
@@ -157,7 +172,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000017.jpg",
@@ -167,7 +183,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000018.jpg",
@@ -177,7 +194,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000019.jpg",
@@ -187,7 +205,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000020.jpg",
@@ -197,7 +216,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000021.jpg",
@@ -207,7 +227,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000022.jpg",
@@ -217,7 +238,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000023.jpg",
@@ -227,7 +249,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000024.jpg",
@@ -237,7 +260,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000025.jpg",
@@ -247,7 +271,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000026.jpg",
@@ -257,7 +282,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000027.jpg",
@@ -267,7 +293,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000028.jpg",
@@ -277,7 +304,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "brown",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000029.jpg",
@@ -287,7 +315,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000030.jpg",
@@ -297,7 +326,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000031.jpg",
@@ -307,7 +337,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000032.jpg",
@@ -317,7 +348,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000033.jpg",
@@ -327,7 +359,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000034.jpg",
@@ -337,7 +370,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000035.jpg",
@@ -347,7 +381,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000036.jpg",
@@ -357,7 +392,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000037.jpg",
@@ -367,7 +403,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000038.jpg",
@@ -377,7 +414,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000039.jpg",
@@ -387,7 +425,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000040.jpg",
@@ -397,7 +436,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000041.jpg",
@@ -407,7 +447,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000042.jpg",
@@ -417,7 +458,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000043.jpg",
@@ -427,7 +469,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000044.jpg",
@@ -437,7 +480,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "fair",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000045.jpg",
@@ -447,7 +491,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000046.jpg",
@@ -457,7 +502,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000047.jpg",
@@ -467,7 +513,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "fair",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000048.jpg",
@@ -477,7 +524,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000049.jpg",
@@ -487,7 +535,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000050.jpg",
@@ -497,7 +546,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000051.jpg",
@@ -507,7 +557,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000052.jpg",
@@ -517,7 +568,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000053.jpg",
@@ -527,7 +579,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000054.jpg",
@@ -537,7 +590,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000055.jpg",
@@ -547,7 +601,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000056.jpg",
@@ -557,7 +612,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000057.jpg",
@@ -567,7 +623,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000058.jpg",
@@ -577,7 +634,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000059.jpg",
@@ -587,7 +645,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000060.jpg",
@@ -597,7 +656,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   },
   {
     "file": "face_000061.jpg",
@@ -607,7 +667,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "olive",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000062.jpg",
@@ -617,7 +678,8 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000063.jpg",
@@ -627,7 +689,8 @@ export const FULL_GALLERY = [
       "eyeColor": "brown",
       "skinTone": "medium",
       "cheekboneStructure": "soft"
-    }
+    },
+    "isIndian": true
   },
   {
     "file": "face_000064.jpg",
@@ -637,6 +700,7 @@ export const FULL_GALLERY = [
       "eyeColor": "hazel",
       "skinTone": "medium",
       "cheekboneStructure": "high"
-    }
+    },
+    "isIndian": false
   }
 ];

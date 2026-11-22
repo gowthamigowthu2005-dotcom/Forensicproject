@@ -79,6 +79,7 @@ export function DnaProvider({ children }) {
     cheekbone: 'high',
     skinTone: 'medium',
     observedHairColor: 'black',
+    population: 'indian',
   };
 
   const initialDna = getMarkersAndProbsForTraits(initialTraits);

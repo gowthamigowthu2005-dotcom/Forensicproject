@@ -66,6 +66,10 @@ export default function GenerationPage() {
         <span className="text-sm font-mono text-gray-300">
           Skin: <strong className="text-cyberBlue capitalize">{dnaState.traits.skinTone || 'Medium'}</strong>
         </span>
+        <span className="text-gray-600">•</span>
+        <span className="text-sm font-mono text-gray-300">
+          Cohort: <strong className="text-green-400">{(dnaState.traits.population || 'indian') === 'global' ? '🌐 Global' : '🇮🇳 Indian'}</strong>
+        </span>
       </div>
 
       {/* ── HIrisPlex probability display ────────────────────────────────────── */}

@@ -69,10 +69,18 @@ function scoreFace(faceTraits, requestedTraits) {
 
 function selectGalleryFaces(requestedTraits, count = 4) {
   const reqSex = (requestedTraits.sex || requestedTraits.gender || 'male').toLowerCase().trim();
+  const population = (requestedTraits.population || 'indian').toLowerCase().trim();
 
   // STRICT biological sex filter: Male candidates NEVER mix with female candidates
-  const candidates = FULL_GALLERY.filter((f) => f.traits.sex === reqSex);
-  const pool = candidates.length >= count ? candidates : FULL_GALLERY;
+  let pool = FULL_GALLERY.filter((f) => f.traits.sex === reqSex);
+
+  // Population cohort filter: When Indian demographic is chosen (default), prioritize authentic South Asian faces
+  if (population === 'indian') {
+    const indianPool = pool.filter((f) => f.isIndian);
+    if (indianPool.length >= count) {
+      pool = indianPool;
+    }
+  }
 
   const scored = pool.map((face) => ({
     ...face,

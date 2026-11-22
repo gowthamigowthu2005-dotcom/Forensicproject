@@ -139,6 +139,35 @@ export default function DnaInputPage() {
               </div>
             </div>
 
+            {/* Demographic Population Cohort */}
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <label className="block text-gray-400 text-sm">Target Demographic Cohort</label>
+                <span className="text-[10px] font-mono text-green-400 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/30">
+                  Calibrated
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { id: 'indian', label: '🇮🇳 Indian (South Asian)' },
+                  { id: 'global', label: '🌐 Global Multi-Ethnic' },
+                ].map((opt) => (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => handleTraitChange('population', opt.id)}
+                    className={`py-2 px-2 rounded-lg border-2 font-bold text-xs capitalize transition-all duration-200 ${
+                      (dnaState.traits.population || 'indian') === opt.id
+                        ? 'border-green-400 bg-green-400/15 text-green-300 shadow-[0_0_10px_#22c55e]'
+                        : 'border-gray-700 bg-darkBg text-gray-400 hover:border-gray-500'
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Other morphological traits */}
             <div>
               <label className="block text-gray-400 text-sm mb-2">Biological Sex</label>
